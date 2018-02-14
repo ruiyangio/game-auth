@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  game-auth:
+    build: ./
+    ports:
+      - "3000:3000"
+    links:
+      - database
+    volumes:
+      - .:/opt/game-auth
+    depends_on:
+      - database
+  database:
+    image: mongo

@@ -1,2 +1,2 @@
 # game-auth
-Auth servicefor games
+Auth service for games
