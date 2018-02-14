@@ -1,15 +1,13 @@
-version: '2'
-
+version: "2"
 services:
   game-auth:
-    build: ./
+    container_name: game-auth-container
+    restart: always
+    build: .
     ports:
       - "3000:3000"
     links:
-      - database
-    volumes:
-      - .:/opt/game-auth
-    depends_on:
-      - database
-  database:
+      - mongo
+  mongo:
+    container_name: mongo
     image: mongo

@@ -1,6 +1,6 @@
-const bodyParser = require('body-parser');
-const debug = require('debug');
 const express = require('express');
+const debug = require('debug');
+const bodyParser = require('body-parser');
 const path = require('path');
 
 const constants = require('./api/constants');
