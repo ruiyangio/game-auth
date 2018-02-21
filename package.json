@@ -30,7 +30,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "start": "node main.js",
+    "start": "node server.js",
     "lint": "eslint api/**/*.js"
   },
   "repository": {

@@ -1,7 +1,7 @@
 version: "2"
 services:
   game-auth:
-    container_name: game-auth-container
+    container_name: game-auth
     restart: always
     build: .
     ports:
@@ -14,3 +14,11 @@ services:
     command: mongod --auth
     ports:
       - "27017:27017"
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - game-auth
