@@ -4,13 +4,14 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const constants = require('./api/constants');
-const routers = require('./api/router');
-const apiResponseMiddleware = require('./api/middleware/api-response-middleware');
-const authMiddleware = require('./api/middleware/auth-middleware');
+const constants = require('./server/constants');
+const routers = require('./server/router');
+const apiResponseMiddleware = require('./server/middleware/api-response-middleware');
+const authMiddleware = require('./server/middleware/auth-middleware');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'dashboard/build')));
 
 app.use(authMiddleware);
 app.use(apiResponseMiddleware);
