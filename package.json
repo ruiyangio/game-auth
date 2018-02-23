@@ -21,6 +21,10 @@
     "api/**/*.js": [
       "prettier --single-quote --write",
       "git add"
+    ],
+    "dashboard/src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
     ]
   },
   "prettier": {
