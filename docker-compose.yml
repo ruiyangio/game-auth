@@ -14,6 +14,8 @@ services:
     command: mongod --auth
     ports:
       - "27017:27017"
+    volumes:
+      - '/opt/mongodb/data:/opt/mongodb/data'
   nginx:
     build: ./nginx
     container_name: nginx
