@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 const debug = require('debug');
 const express = require('express');
 const path = require('path');
-const  logger = require('morgan');
+const logger = require('morgan');
 
 const app = express();
 const constants = require('./server/constants');

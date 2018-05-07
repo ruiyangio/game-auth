@@ -15,7 +15,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - '/opt/mongodb/data:/opt/mongodb/data'
+      - /opt/mongodb/data:/data/game
   nginx:
     build: ./nginx
     container_name: nginx

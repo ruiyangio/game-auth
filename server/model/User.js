@@ -15,6 +15,7 @@ userSchema.pre('save', next => {
   const pwdHash = util.saltHashPassword(user.password);
   user.password = pwdHash.hash;
   user.passwordConf = pwdHash.salt;
+  next();
 });
 
 const User = mongoose.model('User', userSchema);
