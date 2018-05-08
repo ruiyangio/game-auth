@@ -9,15 +9,14 @@ class UserController {
 
   createUser() {
     const self = this;
-    const body = util.lowerObjectKeys(util.deepCopyObject(this.req.body));
+    const body = util.lowerObjectKeys(util.deepCopyObject(self.req.body));
 
     User.create(body)
       .then(user => {
-        console.log(user);
-        util.sendJsonResponse(self.res, 200, user);
+        util.sendJsonResponse(self.res, 200, 'Ok');
       })
       .catch(error => {
-        console.log(error);
+        util.sendJsonResponse(self.res, 500, 'Failed to create user');
       });
   }
 }

@@ -30,19 +30,19 @@ function deepCopyObject(obj) {
 
 function lowerObjectKeys(obj) {
   return Object.keys(obj).reduce((newObj, key) => {
-    map[key.toLowerCase] = obj[key];
-    return map;
+    newObj[key.toLowerCase()] = obj[key];
+    return newObj;
   }, {});
 }
 
 // Set response content type
-function sendJsonResponse(res, statusCode, playLoad) {
+function sendJsonResponse(res, statusCode, payLoad) {
   res.contentType = constants.CONTENT_TYPE_JSON;
   res.status = statusCode;
   res.send(payLoad);
 }
 
-module.export = {
+module.exports = {
   getSha512Hash: getSha512Hash,
   saltHashPassword: saltHashPassword,
   verifyPasswordHash: verifyPasswordHash,

@@ -7,7 +7,7 @@ router.post('/api/token', (req, res) => {
 });
 
 router.post('/api/user', (req, res) => {
-  const userController = new UserController(req, req);
+  const userController = new UserController(req, res);
   userController.createUser();
 });
 

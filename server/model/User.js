@@ -7,10 +7,10 @@ const userSchema = new Schema({
   lastModifiedDateTime: { type: Date, default: Date.now },
   username: { type: String, unique: true, require: true, trim: true },
   password: { type: String, required: true },
-  passwordConf: { type: String, required: true }
+  passwordConf: { type: String }
 });
 
-userSchema.pre('save', next => {
+userSchema.pre('save', function(next) {
   const user = this;
   const pwdHash = util.saltHashPassword(user.password);
   user.password = pwdHash.hash;

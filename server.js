@@ -7,12 +7,12 @@ const mongoose = require('mongoose');
 const constants = require('./server/constants');
 const gameConf = require(constants.GAME_CONF);
 
-//connect to MongoDB
+// Connect to db
 mongoose.connect(gameConf.MONGO_URL);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-  console.log("db connected");
+  debug('db connected');
 });
 
 const app = express();
