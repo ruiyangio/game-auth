@@ -4,4 +4,4 @@ npm-debug.log
 .gitignore
 dashboard/node_modules
 dashboard/.gitignore
-dashboard/build
+dashboard/src

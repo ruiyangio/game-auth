@@ -3,11 +3,20 @@ const debug = require('debug');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
+const mongoose = require('mongoose');
+const constants = require('./server/constants');
+const gameConf = require(constants.GAME_CONF);
+
+//connect to MongoDB
+mongoose.connect(gameConf.MONGO_URL);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log("db connected");
+});
 
 const app = express();
-const constants = require('./server/constants');
 const routers = require('./server/router');
-const apiResponseMiddleware = require('./server/middleware/api-response-middleware');
 const authMiddleware = require('./server/middleware/auth-middleware');
 
 app.use(logger('dev'));
@@ -16,7 +25,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dashboard/build')));
 
 app.use(authMiddleware);
-app.use(apiResponseMiddleware);
 app.use(routers);
 
 // Run

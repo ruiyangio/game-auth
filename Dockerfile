@@ -6,9 +6,5 @@ COPY package.json /opt/game-auth/
 COPY package-lock.json /opt/game-auth/
 RUN npm install
 COPY . /opt/game-auth
-WORKDIR /opt/game-auth/dashboard
-RUN npm install
-RUN npm run build
-WORKDIR /opt/game-auth
 EXPOSE 3000
 CMD [ "npm", "start" ]

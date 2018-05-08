@@ -42,9 +42,11 @@ function sendJsonResponse(res, statusCode, playLoad) {
   res.send(payLoad);
 }
 
-modules.export = {
+module.export = {
   getSha512Hash: getSha512Hash,
   saltHashPassword: saltHashPassword,
   verifyPasswordHash: verifyPasswordHash,
-  deepCopyObject: deepCopyObject
+  deepCopyObject: deepCopyObject,
+  lowerObjectKeys: lowerObjectKeys,
+  sendJsonResponse: sendJsonResponse
 };

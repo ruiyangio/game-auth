@@ -1,11 +1,10 @@
 const util = require('../util');
-const User = require('../models/User');
+const User = require('../model/User');
 
 class UserController {
-  constructor(req, res, next) {
+  constructor(req, res) {
     this.req = req;
     this.res = res;
-    this.next = next;
   }
 
   createUser() {
