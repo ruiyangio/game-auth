@@ -35,7 +35,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "start": "node server.js",
-    "lint": "eslint api/**/*.js"
+    "test": "mocha ./server/**/*.test.js"
   },
   "repository": {
     "type": "git",

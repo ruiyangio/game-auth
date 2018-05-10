@@ -10,7 +10,7 @@ services:
       - mongo
   mongo:
     container_name: mongodb
-    image: mongo
+    image: mongo:3.6.4
     command: mongod --auth
     ports:
       - "27017:27017"

@@ -13,10 +13,12 @@ class UserController {
 
     User.create(body)
       .then(user => {
-        util.sendJsonResponse(self.res, 200, 'Ok');
+        util.sendJsonResponse(self.res, 200, user);
       })
       .catch(error => {
-        util.sendJsonResponse(self.res, 500, 'Failed to create user');
+        util.sendJsonResponse(self.res, 500, {
+          message: 'Failed to create user'
+        });
       });
   }
 }

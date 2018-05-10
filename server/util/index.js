@@ -37,9 +37,10 @@ function lowerObjectKeys(obj) {
 
 // Set response content type
 function sendJsonResponse(res, statusCode, payLoad) {
-  res.contentType = constants.CONTENT_TYPE_JSON;
-  res.status = statusCode;
-  res.send(payLoad);
+  res
+    .set(constants.CONTENT_TYPE_HEADER_NAME, constants.CONTENT_TYPE_JSON)
+    .status(statusCode)
+    .send(payLoad);
 }
 
 module.exports = {
