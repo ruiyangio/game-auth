@@ -14,3 +14,25 @@ describe('Test Password utils', () => {
     );
   });
 });
+
+describe('Test Object utils', () => {
+  it('Should deep copy object', () => {
+    const obj1 = { a: [1, 2, 3], b: { a: 'a' } };
+    const obj2 = util.deepCopyObject(obj1);
+    obj2.a.push(4);
+    assert.equal(
+      JSON.stringify(obj1),
+      '{"a":[1,2,3],"b":{"a":"a"}}',
+      'Object1 should stay the same'
+    );
+  });
+
+  it('Should lower object keys', () => {
+    const obj1 = { A: [1, 2, 3] };
+    assert.deepEqual(
+      util.lowerObjectKeys(obj1),
+      { a: [1, 2, 3] },
+      'First level keys are lowered'
+    );
+  });
+});

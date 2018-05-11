@@ -28,7 +28,11 @@ function deepCopyObject(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
-function lowerObjectKeys(obj) {
+function lowerObjectKeys(obj, deep = true) {
+  if (deep) {
+    obj = deepCopyObject(obj);
+  }
+
   return Object.keys(obj).reduce((newObj, key) => {
     newObj[key.toLowerCase()] = obj[key];
     return newObj;
