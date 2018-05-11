@@ -1,14 +1,19 @@
 const util = require('../util');
 const User = require('../model/User');
+const HttpStatus = require('http-status-codes');
 
 function _getUserPayLoad(user) {
-  return ['_id', 'username', 'createDateTime', 'lastModifiedDateTime'].reduce(
-    (res, key) => {
-      res[key] = user[key];
-      return res;
-    },
-    {}
-  );
+  const fieldsMap = {
+    _id: 'id',
+    username: 'username',
+    createDateTime: 'createDateTime',
+    lastModifiedDateTime: 'lastModifiedDateTime'
+  };
+
+  return Object.keys(fieldsMap).reduce((res, key) => {
+    res[fieldsMap[key]] = user[key];
+    return res;
+  }, {});
 }
 
 class UserController {
@@ -23,11 +28,19 @@ class UserController {
 
     User.create(body)
       .then(user => {
-        util.sendJsonResponse(self.res, 200, _getUserPayLoad(user));
+        util.sendJsonResponse(self.res, HttpStatus.OK, _getUserPayLoad(user));
       })
       .catch(error => {
-        util.sendJsonResponse(self.res, 500, {
-          message: 'Failed to create user'
+        let statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+        let errorMessage = 'Failed to create user';
+
+        if (error && error.code === 11000) {
+          statusCode = HttpStatus.CONFLICT;
+          errorMessage = `The username ${body.username} exists`;
+        }
+
+        util.sendJsonResponse(self.res, statusCode, {
+          message: errorMessage
         });
       });
   }
