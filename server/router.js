@@ -11,4 +11,9 @@ router.post('/api/user', (req, res) => {
   userController.createUser();
 });
 
+router.get('/api/user/:username', (req, res) => {
+  const userController = new UserController(req, res);
+  userController.findUser();
+});
+
 module.exports = router;

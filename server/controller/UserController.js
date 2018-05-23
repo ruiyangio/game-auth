@@ -44,6 +44,27 @@ class UserController {
         });
       });
   }
+
+  findUser() {
+    const self = this;
+    const urlParams = self.req.params;
+
+    if (!urlParams.username) {
+      util.sendJsonResponse(self.res, HttpStatus.BAD_REQUEST, {
+        message: 'username must not be null'
+      });
+    }
+
+    User.findOne({ username: urlParams.username })
+      .then(user => {
+        util.sendJsonResponse(self.res, HttpStatus.OK, _getUserPayLoad(user));
+      })
+      .catch(error => {
+        util.sendJsonResponse(self.res, HttpStatus.INTERNAL_SERVER_ERROR, {
+          message: 'Failed to find user'
+        });
+      });
+  }
 }
 
 module.exports = UserController;
