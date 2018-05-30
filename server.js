@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const debug = require('debug');
 const express = require('express');
+const graphqlHTTP = require('express-graphql');
 const path = require('path');
 const logger = require('morgan');
 const mongoose = require('mongoose');
@@ -26,6 +27,13 @@ app.use(express.static(path.join(__dirname, 'dashboard/build')));
 
 app.use(authMiddleware);
 app.use(routers);
+
+const { graphqlResolvers, graphqlSchema } = require('./server/graph');
+app.use('/graphql', graphqlHTTP({
+  schema: graphqlSchema,
+  rootValue: graphqlResolvers,
+  graphiql: process.env.NODE_ENV === 'dev'
+}));
 
 // Run
 app.set('port', process.env.GAME_AUTH_PORT || constants.DEFAULT_PORT);
