@@ -2,7 +2,6 @@ version: "2"
 services:
   game-auth:
     container_name: game-auth
-    restart: always
     build: .
     ports:
       - "3000:3000"

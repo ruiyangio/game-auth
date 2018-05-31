@@ -15,12 +15,12 @@ function _getUserPayLoad(user) {
   }, {});
 }
 
-function getUser(prev, params, context) {
-  if (!params.username) {
+function getUser(obj, args, context) {
+  if (!obj.username) {
     throw new Error('username can not be null');
   }
 
-  return User.findOne({ username: urlParams.username })
+  return User.findOne({ username: obj.username })
     .then(user => {
       return _getUserPayLoad(user);
     })
@@ -29,7 +29,7 @@ function getUser(prev, params, context) {
     });
 }
 
-function getUsers(prev, params, context) {
+function getUsers(obj, args, context) {
   return User.find({})
     .then(users => {
       return users.map(user => {
@@ -41,14 +41,14 @@ function getUsers(prev, params, context) {
     });
 }
 
-function createUser(prev, params, context) {
-  User.create(params)
+function createUser(obj, args, context) {
+  return User.create(obj)
     .then(user => {
       return _getUserPayLoad(user);
     })
     .catch(error => {
       if (error && error.code === 11000) {
-        throw new Error(`The username ${params.username} exists`);
+        throw new Error(`The username ${obj.username} exists`);
       }
     });
 }

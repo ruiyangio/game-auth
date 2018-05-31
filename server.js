@@ -30,8 +30,8 @@ app.use(routers);
 
 const { graphqlResolvers, graphqlSchema } = require('./server/graph');
 app.use('/graphql', graphqlHTTP({
-  schema: graphqlSchema,
   rootValue: graphqlResolvers,
+  schema: graphqlSchema,
   graphiql: process.env.NODE_ENV === 'dev'
 }));
 
