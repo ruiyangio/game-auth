@@ -17,7 +17,6 @@ db.once('open', () => {
 });
 
 const app = express();
-const routers = require('./server/router');
 const authMiddleware = require('./server/middleware/auth-middleware');
 
 app.use(logger('dev'));
@@ -26,7 +25,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dashboard/build')));
 
 app.use(authMiddleware);
-app.use(routers);
 
 const { graphqlResolvers, graphqlSchema } = require('./server/graph');
 app.use('/graphql', graphqlHTTP({
