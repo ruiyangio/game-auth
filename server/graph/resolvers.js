@@ -1,11 +1,11 @@
 const {
   getUser,
   getUsers,
-  createUser
+  updateUser
 } = require('../controller/userController');
 
 module.exports = {
   user: getUser,
   users: getUsers,
-  createUser: createUser
+  updateUser: updateUser
 };

@@ -6,7 +6,8 @@ function _getUserPayLoad(user) {
     _id: 'id',
     username: 'username',
     createDateTime: 'createDateTime',
-    lastModifiedDateTime: 'lastModifiedDateTime'
+    lastModifiedDateTime: 'lastModifiedDateTime',
+    displayName: 'displayName'
   };
 
   return Object.keys(fieldsMap).reduce((res, key) => {
@@ -41,7 +42,25 @@ function getUsers(obj, args, context) {
     });
 }
 
-function createUser(obj, args, context) {
+function updateUser(obj) {
+  if (!obj.id) {
+    throw new Error('user id can not be null');
+  }
+
+  const updateQuery = {};
+  if (obj.displayname) updateQuery.displayName = obj.displayname;
+  if (obj.password) updateQuery.password = obj.password;
+
+  return User.findOneAndUpdate({ _id: obj.id }, updateQuery)
+    .then(user => {
+      return _getUserPayLoad(user);
+    })
+    .catch(error => {
+      throw new Error('Failed to update user');
+    });
+}
+
+function createUser(obj) {
   return User.create(obj)
     .then(user => {
       return _getUserPayLoad(user);
@@ -56,5 +75,6 @@ function createUser(obj, args, context) {
 module.exports = {
   getUser: getUser,
   getUsers: getUsers,
-  createUser: createUser
+  createUser: createUser,
+  updateUser: updateUser
 };

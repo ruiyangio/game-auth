@@ -7,7 +7,8 @@ const userSchema = new Schema({
   lastModifiedDateTime: { type: Date, default: Date.now },
   username: { type: String, unique: true, require: true, trim: true },
   password: { type: String, required: true },
-  passwordConf: { type: String }
+  passwordConf: { type: String },
+  displayName: { type: String, unique: true, trim: true }
 });
 
 userSchema.pre('save', function(next) {
