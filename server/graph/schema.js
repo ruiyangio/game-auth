@@ -7,7 +7,8 @@ module.exports = buildSchema(`
   }
 
   type Mutation {
-    updateUser(displayname: String, password: String): User
+    createUser(username: String!, password: String!, displayName: String!, admin: Boolean): User
+    updateUser(id: String!, displayName: String, password: String, admin: Boolean): User
   }
 
   type User {
@@ -16,5 +17,6 @@ module.exports = buildSchema(`
     displayName: String
     createDateTime: String
     lastModifiedDateTime: String
+    admin: Boolean
   }
 `);

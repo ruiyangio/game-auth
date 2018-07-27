@@ -18,14 +18,20 @@ db.once('open', () => {
 
 const app = express();
 const authMiddleware = require('./server/middleware/auth-middleware');
+const routers = require('./server/router');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dashboard/build')));
 
+// Token Validation
 app.use(authMiddleware);
 
+// Auth REST API
+app.use(routers);
+
+// GraphQL API
 const { graphqlResolvers, graphqlSchema } = require('./server/graph');
 app.use('/graphql', graphqlHTTP({
   rootValue: graphqlResolvers,

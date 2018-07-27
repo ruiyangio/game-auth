@@ -5,9 +5,10 @@ function _getUserPayLoad(user) {
   const fieldsMap = {
     _id: 'id',
     username: 'username',
+    displayName: 'displayName',
     createDateTime: 'createDateTime',
     lastModifiedDateTime: 'lastModifiedDateTime',
-    displayName: 'displayName'
+    admin: 'admin'
   };
 
   return Object.keys(fieldsMap).reduce((res, key) => {
@@ -48,7 +49,7 @@ function updateUser(obj) {
   }
 
   const updateQuery = {};
-  if (obj.displayname) updateQuery.displayName = obj.displayname;
+  if (obj.displayName) updateQuery.displayName = obj.displayName;
   if (obj.password) updateQuery.password = obj.password;
 
   return User.findOneAndUpdate({ _id: obj.id }, updateQuery)
